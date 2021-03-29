@@ -1,4 +1,4 @@
-import React, { createRef, useCallback, useReducer, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useQueryParams } from '../../hooks/queryParams';
 
@@ -11,8 +11,6 @@ interface IEntry {
 const Main: React.FC = () => {
    const history = useHistory();
    const params = useQueryParams<object>();
-   const [, forceUpdate] = useReducer(x => x + 1, 0);
-
    const [isQueryParamsModalOpened, setIsQueryParamsModalOpened] = useState(false);
 
    const [entries, setEntries] = useState<IEntry[]>([
@@ -55,29 +53,23 @@ const Main: React.FC = () => {
          return;
       }
 
-      const draft = entries;
+      const draft = [...entries];
       draft.splice(entryRef, 1);
       setEntries(draft);
-
-      forceUpdate();
    },
    [entries]);
 
    const updateEntryKey = useCallback((e, entryRef) => {
-      const draft = entries;
+      const draft = [...entries];
       draft[entryRef].key = e.target.value;
-
       setEntries(draft);
-      forceUpdate();
    },
    [entries]);
 
    const updateEntryValue = useCallback((e, entryRef) => {
-      const draft = entries;
+      const draft = [...entries];
       draft[entryRef].value = e.target.value;
-
       setEntries(draft);
-      forceUpdate();
    },
    [entries]);
 
