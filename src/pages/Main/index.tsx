@@ -53,21 +53,21 @@ const Main: React.FC = () => {
          return;
       }
 
-      const draft = [...entries];
+      const draft = Array.from(entries);
       draft.splice(entryRef, 1);
       setEntries(draft);
    },
    [entries]);
 
    const updateEntryKey = useCallback((e, entryRef) => {
-      const draft = [...entries];
+      const draft = Array.from(entries);
       draft[entryRef].key = e.target.value;
       setEntries(draft);
    },
    [entries]);
 
    const updateEntryValue = useCallback((e, entryRef) => {
-      const draft = [...entries];
+      const draft = Array.from(entries);
       draft[entryRef].value = e.target.value;
       setEntries(draft);
    },
